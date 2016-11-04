@@ -435,10 +435,19 @@ var BingTTS;
                     gender = "'Male'";
                     supportedLocaleValue = "Microsoft Server Speech Text to Speech Voice (en-US, BenjaminRUS)";
             }
-            SSML += locale + "><voice xml:lang=" + locale + " xml:gender=" + gender + " name='" + supportedLocaleValue + "'>" + `${text}` + "</voice></speak>";
+            SSML += locale + "><voice xml:lang=" + locale + " xml:gender=" + gender + " name='" + supportedLocaleValue + "'>" + `${text.encodeHTML()}` + "</voice></speak>";
             return SSML;
         }
     }
     BingTTS.Client = Client;
 })(BingTTS || (BingTTS = {}));
+if (!String.prototype.encodeHTML) {
+    String.prototype.encodeHTML = function () {
+        return this.replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&apos;');
+    };
+}
 //# sourceMappingURL=BingTTSClient.js.map

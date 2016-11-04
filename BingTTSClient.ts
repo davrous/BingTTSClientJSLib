@@ -72,7 +72,7 @@ module BingTTS {
         arEG_Female, deDE_Female, deDE_Male, enAU_Female, enCA_Female, enGB_Female, enGB_Male, enIN_Male, enUS_Female, enUS_Male, esES_Female, esES_Male, esMX_Male, frCA_Female,
         frFR_Female, frFR_Male, itIT_Male, jpJP_Female, jpJP_Male, ptBR_Male, ruRU_Female, ruRU_Male, zhCN_Female, zhCN_Female2, zhCN_Male, zhHK_Female, zhHK_Male, zhTW_Female, zhTW_Male
     }
-     
+ 
     export class Client {
         private _playing: boolean;
         private _audioContext: AudioContext;
@@ -473,7 +473,7 @@ module BingTTS {
                     gender = "'Male'";
                     supportedLocaleValue = "Microsoft Server Speech Text to Speech Voice (en-US, BenjaminRUS)";
             }
-            SSML += locale + "><voice xml:lang=" + locale + " xml:gender=" + gender + " name='" + supportedLocaleValue + "'>" + `${text}` + "</voice></speak>" ;
+            SSML += locale + "><voice xml:lang=" + locale + " xml:gender=" + gender + " name='" + supportedLocaleValue + "'>" + `${text.encodeHTML()}` + "</voice></speak>" ;
             return SSML;
         }
     }
@@ -482,4 +482,18 @@ module BingTTS {
 interface Window {
     AudioContext(func: any): any;
     webkitAudioContext(func: any): any;
+}
+
+interface String {
+    encodeHTML;
+}
+
+if (!String.prototype.encodeHTML) {
+    String.prototype.encodeHTML = function () {
+        return this.replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&apos;');
+    };
 }
