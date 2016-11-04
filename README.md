@@ -9,6 +9,8 @@ A small JavaScript library to call Bing Text-To-Speech API
   - Free: https://www.microsoft.com/cognitive-services/en-us/subscriptions?productId=/products/Bing.Speech.Preview
   - Paid: https://portal.azure.com/#create/Microsoft.CognitiveServices/apitype/Bing.Speech/pricingtier/S0
 
+- The key to enter into the code below us the second key you get once you requested yours: ![Copy the second key](/keys.png)
+
 ## Usage
 ### Constructor
 ```javascript
